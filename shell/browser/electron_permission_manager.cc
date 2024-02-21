@@ -139,6 +139,11 @@ void ElectronPermissionManager::SetBluetoothPairingHandler(
   bluetooth_pairing_handler_ = handler;
 }
 
+void ElectronPermissionManager::SetFileSystemAccessHandler(
+    const FileSystemAccessHandler& handler) {
+  file_system_access_handler_ = handler;
+}
+
 void ElectronPermissionManager::RequestPermissionWithDetails(
     blink::PermissionType permission,
     content::RenderFrameHost* render_frame_host,

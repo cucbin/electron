@@ -21,9 +21,15 @@ class Value;
 
 namespace content {
 class WebContents;
-}
+}  // namespace content
+
+namespace permissions {
+enum class PermissionAction;
+}  // namespace permissions
 
 namespace electron {
+
+struct RequestData;
 
 class ElectronPermissionManager : public content::PermissionControllerDelegate {
  public:
@@ -61,6 +67,11 @@ class ElectronPermissionManager : public content::PermissionControllerDelegate {
   using BluetoothPairingHandler =
       base::RepeatingCallback<void(gin_helper::Dictionary, PairCallback)>;
 
+  using PermissionActionCallback =
+      base::OnceCallback<void(permissions::PermissionAction result)>;
+  using FileSystemAccessHandler =
+      base::RepeatingCallback<void(RequestData data, PermissionActionCallback)>;
+
   void RequestPermissionWithDetails(blink::PermissionType permission,
                                     content::RenderFrameHost* render_frame_host,
                                     const GURL& requesting_origin,
@@ -74,6 +85,7 @@ class ElectronPermissionManager : public content::PermissionControllerDelegate {
   void SetDevicePermissionHandler(const DeviceCheckHandler& handler);
   void SetProtectedUSBHandler(const ProtectedUSBHandler& handler);
   void SetBluetoothPairingHandler(const BluetoothPairingHandler& handler);
+  void SetFileSystemAccessHandler(const FileSystemAccessHandler& handler);
 
   void CheckBluetoothDevicePair(gin_helper::Dictionary details,
                                 PairCallback pair_callback) const;
@@ -163,6 +175,7 @@ class ElectronPermissionManager : public content::PermissionControllerDelegate {
   DeviceCheckHandler device_permission_handler_;
   ProtectedUSBHandler protected_usb_handler_;
   BluetoothPairingHandler bluetooth_pairing_handler_;
+  FileSystemAccessHandler file_system_access_handler_;
 
   PendingRequestsMap pending_requests_;
 };
