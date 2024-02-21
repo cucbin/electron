@@ -1530,13 +1530,11 @@ Clears various different types of data.
 
 * **Background Fetch**: `backgroundFetch`
 * **Cache**: `cache`
-* **Cache Storage**: `cacheStorage`
 * **Cookies**: `cookies`
 * **Downloads**: `downloads`
 * **File Systems**: `fileSystems`
 * **IndexedDB**: `indexedDB`
 * **Local Storage**: `localStorage`
-* **Media Licenses**: `mediaLicenses`
 * **Service Workers**: `serviceWorkers`
 * **WebSQL**: `webSQL`
 
